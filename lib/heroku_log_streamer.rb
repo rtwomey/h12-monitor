@@ -9,16 +9,21 @@ class HerokuLogStreamer
   end
 
   def stream(&block)
-    request.start do
-      path = heroku_log_url.path + (heroku_log_url.query ? "?" + heroku_log_url.query : "")
+    begin
+      request.start do
+        path = heroku_log_url.path + (heroku_log_url.query ? "?" + heroku_log_url.query : "")
 
-      request.request_get(path) do |request|
-        request.read_body do |chunk|
-          chunk.split("\n").each do |line|
-            yield line
+        request.request_get(path) do |request|
+          request.read_body do |chunk|
+            chunk.split("\n").each do |line|
+              yield line
+            end
           end
         end
       end
+    rescue Timeout::Error => e
+      puts "Timeout in Heroku logs (#{e.message}). Retrying"
+      retry
     end
   end
 
