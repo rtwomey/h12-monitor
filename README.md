@@ -25,7 +25,7 @@ This monitor is designed as a stop-gap until you can debug and solve the underly
 1. Log into Heroku and get your API key. It's on your My Account page.
 2. Edit run.rb and add your API key to line 13. Set your heroku app name on line 14.
 3. Run `bundle install`.
-4. Start the app in a console by running `ruby run.rb`.
+4. Start the app by running `ruby h12-monitor.rb run`
 
 ## TODO
 
