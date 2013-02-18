@@ -10,6 +10,8 @@ class HerokuLogStreamer
 
   def stream(&block)
     begin
+      puts "Connecting to Heroku logplex for #{@app_name}."
+
       request.start do
         path = heroku_log_url.path + (heroku_log_url.query ? "?" + heroku_log_url.query : "")
 

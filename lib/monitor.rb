@@ -10,24 +10,26 @@ class Monitor
   end
 
   def monitor
-    streamer = HerokuLogStreamer.new(heroku_connection, @app_name, tail: '1', ps: 'router')
+    loop do
+      streamer = HerokuLogStreamer.new(heroku_connection, @app_name, tail: '1', ps: 'router')
 
-    streamer.stream do |line|
-      log_line = HerokuLogLine.new(line)
+      streamer.stream do |line|
+        log_line = HerokuLogLine.new(line)
 
-      if dyno_name = log_line.dyno
-        @dynos[dyno_name] ||= Dyno.new(heroku_connection, @app_name, dyno_name)
+        if dyno_name = log_line.dyno
+          @dynos[dyno_name] ||= Dyno.new(heroku_connection, @app_name, dyno_name)
 
-        if log_line.h12?
-          @dynos[dyno_name].handle_h12
+          if log_line.h12?
+            @dynos[dyno_name].handle_h12
+          else
+            @dynos[dyno_name].reset_error_count
+          end
         else
-          @dynos[dyno_name].reset_error_count
+          puts "malformed line: #{line}"
         end
-      else
-        puts "malformed line: #{line}"
-      end
 
-      update_line_statistics
+        update_line_statistics
+      end
     end
   end
 
