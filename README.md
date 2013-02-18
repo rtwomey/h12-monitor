@@ -49,3 +49,7 @@ This monitor is designed as a stop-gap until you can debug and solve the underly
 ## TODO
 
 1. Could use some more coverage, mostly around the network connection stuff with the log streamer.
+
+## License
+
+h12-monitor is Copyright © 2013 Ryan Twomey. It is free software, and may be redistributed under the terms specified in the MIT-LICENSE file.
