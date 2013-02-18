@@ -8,12 +8,12 @@ if defined?(Bundler)
 end
 
 require 'daemons'
-require File.expand_path('../lib/monitor', __FILE__)
+require File.expand_path('../lib/h12_monitor', __FILE__)
 
 # You can get your API key from Heroku's My Account page
 API_KEY = '--MY_API_KEY--'
 APP_NAME = '--MY_APP_NAME--'
 
 Daemons.run_proc('h12-monitor.rb') do
-  Monitor.new(APP_NAME, API_KEY).monitor
+  H12Monitor.new(APP_NAME, API_KEY).monitor
 end

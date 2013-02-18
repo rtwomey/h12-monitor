@@ -1,3 +1,5 @@
+require 'monitor_logger'
+
 class Dyno
   MAX_ALLOWED_ERROR_COUNT = 3
 
@@ -10,7 +12,7 @@ class Dyno
 
   def handle_h12
     add_to_error_count
-    puts "#{@name} reports H12 (##{@error_count})"
+    MonitorLogger.warn "#{@name} reports H12 (##{@error_count})"
 
     if exceeded_error_count?
       restart_dyno
@@ -33,7 +35,7 @@ class Dyno
   end
 
   def restart_dyno
-    puts "restarting dyno #{@name}"
+    MonitorLogger.warn "restarting dyno #{@name}"
     @heroku_connection.post_ps_restart @app_name, ps: @name
   end
 end

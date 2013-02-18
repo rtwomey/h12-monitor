@@ -5,7 +5,7 @@ require 'heroku_log_streamer'
 require 'heroku_log_line'
 require 'dyno'
 
-class Monitor
+class H12Monitor
   def initialize(app_name, heroku_api_key)
     @app_name = app_name
     @heroku_api_key = heroku_api_key
@@ -28,7 +28,7 @@ class Monitor
             @dynos[dyno_name].reset_error_count
           end
         else
-          puts "malformed line: #{line}"
+          MonitorLogger.info "malformed line: #{line}"
         end
 
         update_line_statistics
@@ -47,7 +47,8 @@ class Monitor
     @line_counter += 1
 
     if @line_counter % 50 == 0
-      puts "#{@app_name}: monitored #{@line_counter} lines, #{@dynos.count} dynos reporting"
+      dynos_reporting = "#{@dynos.count} dynos reporting"
+      MonitorLogger.info "#{@app_name}: monitored #{@line_counter} lines, #{dynos_reporting}"
     end
   end
 end
