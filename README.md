@@ -29,5 +29,4 @@ This monitor is designed as a stop-gap until you can debug and solve the underly
 
 ## TODO
 
-1. Add daemon tools to ensure this is continuously running
-2. Could use some more coverage, mostly around the network connection stuff with the log streamer.
+1. Could use some more coverage, mostly around the network connection stuff with the log streamer.
