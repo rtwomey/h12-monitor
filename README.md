@@ -30,5 +30,4 @@ This monitor is designed as a stop-gap until you can debug and solve the underly
 ## TODO
 
 1. Add daemon tools to ensure this is continuously running
-2. The restarting line is currently commented out (see lib/dyno.rb:37) and untested. Putting this through a dry-run first before turning it on.
-3. Could use some more coverage, mostly around the network connection stuff with the log streamer.
+2. Could use some more coverage, mostly around the network connection stuff with the log streamer.
