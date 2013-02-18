@@ -1,5 +1,5 @@
-require 'rspec'
-require File.expand_path('../../lib/heroku_log_line', __FILE__)
+require 'spec_helper'
+require 'heroku_log_line'
 
 describe HerokuLogLine do
   context 'with an h12' do

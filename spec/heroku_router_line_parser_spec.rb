@@ -1,5 +1,5 @@
-require 'rspec'
-require File.expand_path('../../lib/heroku_router_line_parser', __FILE__)
+require 'spec_helper'
+require 'heroku_router_line_parser'
 
 describe HerokuRouterLineParser do
   context 'with a router log entry' do
