@@ -34,6 +34,6 @@ class Dyno
 
   def restart_dyno
     puts "restarting dyno #{@name}"
-    @heroku_connection.post_ps_restart(@app_name, ps: @name)
+    @heroku_connection.post_ps_restart @app_name, ps: @name
   end
 end

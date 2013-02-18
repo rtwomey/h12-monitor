@@ -1,3 +1,6 @@
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+
 require 'heroku_log_streamer'
 require 'heroku_log_line'
 require 'dyno'
