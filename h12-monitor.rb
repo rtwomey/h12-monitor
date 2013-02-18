@@ -7,10 +7,13 @@ if defined?(Bundler)
   Bundler.require
 end
 
+require 'daemons'
 require File.expand_path('../lib/monitor', __FILE__)
 
 # You can get your API key from Heroku's My Account page
 API_KEY = '--MY_API_KEY--'
 APP_NAME = '--MY_APP_NAME--'
 
-Monitor.new(APP_NAME, API_KEY).monitor
+Daemons.run_proc('h12-monitor.rb') do
+  Monitor.new(APP_NAME, API_KEY).monitor
+end
