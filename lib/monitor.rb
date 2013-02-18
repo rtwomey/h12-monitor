@@ -42,7 +42,7 @@ class Monitor
     @line_counter += 1
 
     if @line_counter % 50 == 0
-      puts "monitored #{@line_counter} lines, #{@dynos.count} dynos reporting"
+      puts "#{@app_name}: monitored #{@line_counter} lines, #{@dynos.count} dynos reporting"
     end
   end
 end
