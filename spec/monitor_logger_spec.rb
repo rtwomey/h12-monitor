@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe MonitorLogger do
   before do
-    @stub = stub(Logger)
-    Logger.stub! new: @stub
-    MonitorLogger.stub_chain :instance, logger: @stub
+    @logger = stub(Logger)
+    Logger.stub! new: @logger
+    MonitorLogger.stub_chain :instance, logger: @logger
   end
 
   after do
@@ -13,31 +13,31 @@ describe MonitorLogger do
 
   context 'info' do
     before do
-      stub_log_method @stub, :info
+      stub_log_method @logger, :info
     end
 
     it 'logs an info message' do
-      @stub.should have_received(:info).with('info message')
+      @logger.should have_received(:info).with('info message')
     end
   end
 
   context 'warn' do
     before do
-      stub_log_method @stub, :warn
+      stub_log_method @logger, :warn
     end
 
     it 'logs a warning message' do
-      @stub.should have_received(:warn).with('warn message')
+      @logger.should have_received(:warn).with('warn message')
     end
   end
 
   context 'error' do
     before do
-      stub_log_method @stub, :error
+      stub_log_method @logger, :error
     end
 
     it 'logs an error message' do
-      @stub.should have_received(:error).with('error message')
+      @logger.should have_received(:error).with('error message')
     end
   end
 
