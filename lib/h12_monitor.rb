@@ -14,7 +14,7 @@ class H12Monitor
 
   def monitor
     loop do
-      streamer = HerokuLogStreamer.new(heroku_connection, @app_name, tail: '1', ps: 'router')
+      streamer = HerokuLogStreamer.new(heroku_connection, @app_name, heroku_params)
 
       streamer.stream do |line|
         log_line = HerokuLogLine.new(line)
@@ -40,6 +40,10 @@ class H12Monitor
 
   def heroku_connection
     @heroku_connection ||= Heroku::API.new(api_key: @heroku_api_key)
+  end
+
+  def heroku_params
+    { tail: '1', ps: 'router' }
   end
 
   def update_line_statistics
