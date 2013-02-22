@@ -29,7 +29,9 @@ class HerokuLogStreamer
     rescue Timeout::Error => e
       MonitorLogger.error "Timeout in Heroku logs (#{e.message}). Retrying"
       retry
-    rescue
+    rescue Errno::ECONNREFUSED
+      MonitorLogger.error 'Failed to connect to Heroku logplex. Retrying'
+      retry
     end
   end
 
