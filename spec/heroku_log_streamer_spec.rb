@@ -2,6 +2,18 @@ require 'spec_helper'
 require 'heroku_log_streamer'
 
 describe HerokuLogStreamer do
+  context 'OPEN_TIMEOUT' do
+    it 'should be expected' do
+      HerokuLogStreamer::OPEN_TIMEOUT.should == 5
+    end
+  end
+
+  context 'READ_TIMEOUT' do
+    it 'should be expected' do
+      HerokuLogStreamer::READ_TIMEOUT.should == 10
+    end
+  end
+
   context 'stream' do
     before do
       @heroku_connection = stub get_logs: stub(body: heroku_logs_uri)

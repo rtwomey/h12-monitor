@@ -2,6 +2,9 @@ require 'uri'
 require 'net/http'
 
 class HerokuLogStreamer
+  OPEN_TIMEOUT = 5
+  READ_TIMEOUT = 10
+
   def initialize(heroku_connection, app_name, heroku_opts={})
     @heroku_connection = heroku_connection
     @app_name = app_name
@@ -26,6 +29,7 @@ class HerokuLogStreamer
     rescue Timeout::Error => e
       MonitorLogger.error "Timeout in Heroku logs (#{e.message}). Retrying"
       retry
+    rescue
     end
   end
 
@@ -39,6 +43,8 @@ class HerokuLogStreamer
     @http ||= Net::HTTP.new(heroku_log_url.host, heroku_log_url.port).tap do |http|
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      http.open_timeout = OPEN_TIMEOUT
+      http.read_timeout = READ_TIMEOUT
     end
   end
 end
