@@ -37,6 +37,7 @@ describe HerokuLogStreamer do
     pending 'should yield with log line'
     pending 'should retry on timeout error'
     pending 'should retry on connection error'
+    pending 'should retry on end of file error'
   end
 
   private

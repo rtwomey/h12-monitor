@@ -32,6 +32,9 @@ class HerokuLogStreamer
     rescue Errno::ECONNREFUSED
       MonitorLogger.error 'Failed to connect to Heroku logplex. Retrying'
       retry
+    rescue EOFError
+      MonitorLogger.error 'End of file (EOF) reached. Retrying'
+      retry
     end
   end
 
