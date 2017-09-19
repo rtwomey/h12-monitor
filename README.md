@@ -14,14 +14,14 @@ When run, it will connect to the Heroku API and open a streaming HTTP connection
 
   * If a dyno reports an H12, increment a counter for that dyno
     * If the dyno exceeds 3 consecutive H12s, issue a restart.
-  * Whenever a dyno successfully processes a request, reset teh counter.
+  * Whenever a dyno successfully processes a request, reset the counter.
 
 Thus, a dyno must report three consecutive H12s in order to be considered "stuck". The script will then issue a restart via the Heroku API.
 
 ## How to use it
 
 1. Log into Heroku and get your API key. It's on your My Account page.
-2. Edit run.rb and add your API key to line 13. Set your heroku app name on line 14.
+2. Edit h12-monitor.rb and add your API key to line 14. Set your heroku app name on line 15.
 3. Run `bundle install`.
 4. Start the app by running `ruby h12-monitor.rb run`
 
